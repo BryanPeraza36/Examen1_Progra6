@@ -8,7 +8,16 @@ using System.Threading.Tasks;
 
 namespace WBL.dbo
 {
-    public class ParametroService
+    public interface IParametroService
+    {
+        Task<DBEntity> Create(ParametroEntity entity);
+        Task<DBEntity> Delete(ParametroEntity entity);
+        Task<IEnumerable<ParametroEntity>> Get();
+        Task<ParametroEntity> GetById(ParametroEntity entity);
+        Task<DBEntity> Update(ParametroEntity entity);
+    }
+
+    public class ParametroService : IParametroService
     {
         private readonly IDataAccess sql;
 
@@ -55,10 +64,14 @@ namespace WBL.dbo
             try
             {
                 var result = sql.ExecuteAsync("dbo.ParametroInsertar", new
-                { entity.Codigo
-                  ,entity.Descripcion
-                  ,entity.Valor
-                  ,entity.Estado
+                {
+                    entity.Codigo
+                  ,
+                    entity.Descripcion
+                  ,
+                    entity.Valor
+                  ,
+                    entity.Estado
                 });
                 return await result;
             }
@@ -76,11 +89,15 @@ namespace WBL.dbo
             {
                 var result = sql.ExecuteAsync("dbo.ParametroActualizar", new
                 {
-                   entity.Id_Parametro
-                  ,entity.Codigo
-                  ,entity.Descripcion
-                  ,entity.Valor
-                  ,entity.Estado
+                    entity.Id_Parametro
+                  ,
+                    entity.Codigo
+                  ,
+                    entity.Descripcion
+                  ,
+                    entity.Valor
+                  ,
+                    entity.Estado
                 });
                 return await result;
             }
@@ -91,15 +108,15 @@ namespace WBL.dbo
             }
         }
 
-        //Metodo Actualizar
+        //Metodo Eliminar
         public async Task<DBEntity> Delete(ParametroEntity entity)
         {
             try
             {
                 var result = sql.ExecuteAsync("dbo.ParametroEliminar", new
                 {
-                   entity.Id_Parametro
-                  
+                    entity.Id_Parametro
+
                 });
                 return await result;
             }
