@@ -12,6 +12,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">Parametro</h5>
+            <a class="btn btn-success" asp-page="Edit"><i class='bx bx-add-to-queue'></i></a>
 
             <div class="row">
                 <div clss ="col-12">
@@ -25,6 +26,25 @@
                                 <th>Estado</th>
                             </tr>
                         </thead>
+                        <tbody>
+                                @foreach (var item in Model.GridList)
+                                { 
+                            <tr>
+                                <td>@item.Id_Parametro</td>
+                                <td>@item.Codigo</td>
+                                <td>@item.Descripcion</td>
+                                <td>@item.Valor</td>
+                                <td>@item.Estado</td>
+                                <td>
+                                    <a class="btn btn-success" asp-page="Edit" asp-route-id=""><i class='bx bx-edit-alt'></i></a>
+                                    <button type="button" class="btn btn-success" onclick="ParametroGrid.OnClickEliminar(@item.Id_Parametro)"><i class='bx bx-trash'></i></button>
+                                </td>
+
+                            </tr>
+                                }
+
+
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -32,8 +52,17 @@
 
 
 
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+           
         </div>
     </div>
 
 </div>
+
+@section Scripts{ 
+
+    <script>
+        var MensajeApp = "@Html.Raw(Model.Mensaje)";
+    </script>
+    <script defer src="~/App/Parametro/Grid.js"></script>
+
+}

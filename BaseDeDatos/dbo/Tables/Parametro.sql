@@ -9,3 +9,5 @@
 )
 WITH(DATA_COMPRESSION = PAGE)
 GO
+
+

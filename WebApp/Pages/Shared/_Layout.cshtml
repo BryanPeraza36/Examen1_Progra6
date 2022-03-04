@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <base href="/" />
     <title>@ViewData["Title"] - WebApp</title>
-   
+   @await Html.PartialAsync("_HeaderPartial") 
 </head>
 <body>
-  
+
     @RenderBody()
-  
+
+    @await Html.PartialAsync("_ScriptsPartial")
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
